@@ -13,19 +13,22 @@ class ArchiveReader
 		pHandle = archive_read_new()
 		archive_read_support_filter_all(pHandle)
 		archive_read_support_format_all(pHandle)
-		if cFilename != NULL and cFilename != ""
+		if cFilename != NULL
 			open(cFilename)
 		ok
 
 	func open cFilename
 		return archive_read_open_filename(pHandle, cFilename, 10240)
 
+	func addPassphrase cPassword
+		return archive_read_add_passphrase(pHandle, cPassword)
+
 	func openMemory cData
 		return archive_read_open_memory(pHandle, cData)
 
 	func nextEntry
 		pCurrentEntry = archive_read_next_header(pHandle)
-		if isnull(pCurrentEntry)
+		if isNull(pCurrentEntry)
 			return false
 		ok
 		return true
@@ -34,31 +37,31 @@ class ArchiveReader
 		return pCurrentEntry
 
 	func entryPath
-		if pCurrentEntry != NULL
+		if not isNull(pCurrentEntry)
 			return archive_entry_pathname(pCurrentEntry)
 		ok
 		return NULL
 
 	func entrySize
-		if pCurrentEntry != NULL
+		if not isNull(pCurrentEntry)
 			return archive_entry_size(pCurrentEntry)
 		ok
-		return 0
+		return false
 
 	func entryIsDir
-		if pCurrentEntry != NULL
+		if not isNull(pCurrentEntry)
 			return archive_entry_is_directory(pCurrentEntry)
 		ok
 		return false
 
 	func entryIsFile
-		if pCurrentEntry != NULL
+		if not isNull(pCurrentEntry)
 			return archive_entry_is_file(pCurrentEntry)
 		ok
 		return false
 
 	func entryIsSymlink
-		if pCurrentEntry != NULL
+		if not isNull(pCurrentEntry)
 			return archive_entry_is_symlink(pCurrentEntry)
 		ok
 		return false
@@ -77,42 +80,42 @@ class ArchiveReader
 		return archive_read_data_skip(pHandle)
 
 	func close
-		if pHandle != NULL
+		if not isNull(pHandle)
 			archive_read_close(pHandle)
 		ok
 
 	func free
-		if pHandle != NULL
+		if not isNull(pHandle)
 			archive_read_free(pHandle)
 			pHandle = NULL
 		ok
 
 	func errorString
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_error_string(pHandle)
 		ok
 		return NULL
 
 	func formatName
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_format_name(pHandle)
 		ok
 		return NULL
 
 	func filterName
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_filter_name(pHandle, 0)
 		ok
 		return NULL
 
 	func errno
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_errno(pHandle)
 		ok
-		return 0
+		return false
 
 	func readDataBlock
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_read_data_block(pHandle)
 		ok
 		return [NULL, 0, 0]
@@ -212,40 +215,40 @@ class ArchiveWriter
 		return addFile(cArchivePath, cData)
 
 	func close
-		if pHandle != NULL
+		if not isNull(pHandle)
 			archive_write_close(pHandle)
 		ok
 
 	func free
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_free(pEntry)
 			pEntry = NULL
 		ok
-		if pHandle != NULL
+		if not isNull(pHandle)
 			archive_write_free(pHandle)
 			pHandle = NULL
 		ok
 
 	func errorString
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_error_string(pHandle)
 		ok
 		return NULL
 
 	func errno
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_errno(pHandle)
 		ok
-		return 0
+		return false
 
 	func filterName
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_filter_name(pHandle, 0)
 		ok
 		return NULL
 
 	func setOptions cOptions
-		if pHandle != NULL
+		if not isNull(pHandle)
 			return archive_write_set_options(pHandle, cOptions)
 		ok
 		return ARCHIVE_FAILED
@@ -290,103 +293,103 @@ class ArchiveEntry
 		ok
 
 	func clear
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_clear(pEntry)
 		ok
 		return self
 
 	func clone
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return new ArchiveEntry(archive_entry_clone(pEntry))
 		ok
 		return NULL
 
 	func pathname
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_pathname(pEntry)
 		ok
 		return NULL
 
 	func setPathname cPath
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_pathname(pEntry, cPath)
 		ok
 		return self
 
 	func size
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_size(pEntry)
 		ok
-		return 0
+		return false
 
 	func setSize nSize
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_size(pEntry, nSize)
 		ok
 		return self
 
 	func filetype
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_filetype(pEntry)
 		ok
 		return ARCHIVE_ENTRY_FILE
 
 	func setFiletype nType
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_filetype(pEntry, nType)
 		ok
 		return self
 
 	func perm
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_perm(pEntry)
 		ok
-		return 0
+		return false
 
 	func setPerm nPerm
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_perm(pEntry, nPerm)
 		ok
 		return self
 
 	func mtime
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_mtime(pEntry)
 		ok
-		return 0
+		return false
 
 	func setMtime nTime
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_mtime(pEntry, nTime, 0)
 		ok
 		return self
 
 	func symlink
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_symlink(pEntry)
 		ok
 		return NULL
 
 	func setSymlink cTarget
-		if pEntry != NULL
+		if not isNull(pEntry)
 			archive_entry_set_symlink(pEntry, cTarget)
 		ok
 		return self
 
 	func isDirectory
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_is_directory(pEntry)
 		ok
 		return false
 
 	func isFile
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_is_file(pEntry)
 		ok
 		return false
 
 	func isSymlink
-		if pEntry != NULL
+		if not isNull(pEntry)
 			return archive_entry_is_symlink(pEntry)
 		ok
 		return false
@@ -395,7 +398,7 @@ class ArchiveEntry
 		return pEntry
 
 	func free
-		if pEntry != NULL and lOwned
+		if not isNull(pEntry) and lOwned
 			archive_entry_free(pEntry)
 			pEntry = NULL
 		ok
