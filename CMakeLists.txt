@@ -242,6 +242,11 @@ set(ZSTD_INCLUDE_DIR ${DEPS_DIR}/zstd/lib)
 set(ZSTD_LIBRARY libzstd_static)
 set(ZSTD_FOUND TRUE CACHE BOOL "" FORCE)
 
+# Force ZSTD compression support (skip try_compile since libzstd not built yet)
+set(HAVE_ZSTD_compressStream TRUE CACHE BOOL "" FORCE)
+set(HAVE_ZSTD_minCLevel TRUE CACHE BOOL "" FORCE)
+set(HAVE_LIBZSTD TRUE CACHE BOOL "" FORCE)
+
 set(LZ4_INCLUDE_DIR ${DEPS_DIR}/lz4/lib)
 set(LZ4_LIBRARY lz4_static)
 set(LZ4_FOUND TRUE CACHE BOOL "" FORCE)
