@@ -1,4 +1,5 @@
 load "archive.ring"
+load "stdlibcore.ring"
 
 # Complete example: Building a simple backup utility
 
@@ -6,7 +7,8 @@ load "archive.ring"
 ? ""
 
 # Create some sample files to backup
-system("mkdir -p backup_test/docs backup_test/data")
+makeDir("backup_test/docs")
+makeDir("backup_test/data")
 write("backup_test/readme.txt", "Project README file")
 write("backup_test/docs/manual.txt", "User manual content here")
 write("backup_test/data/config.json", '{"setting": "value"}')
@@ -54,7 +56,7 @@ cContent = archive.readFile("backup.zip", "data/config.json")
 # 4. Full restore
 ? ""
 ? "Restoring backup to 'restored/' folder..."
-system("mkdir -p restored")
+makeDir("restored")
 archive.extract("backup.zip", "restored/")
 ? "Restore complete!"
 
@@ -69,7 +71,8 @@ for aItem in aRestored
 next
 
 # Cleanup
-system("rm -rf backup_test restored")
+remove("backup_test")
+remove("restored")
 remove("backup.zip")
 
 ? ""

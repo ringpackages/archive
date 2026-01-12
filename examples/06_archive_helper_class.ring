@@ -1,4 +1,5 @@
 load "archive.ring"
+load "stdlibcore.ring"
 
 # Example: Using the Archive helper class for common operations
 
@@ -35,7 +36,7 @@ cContent = archive.readFile("documents.tar.gz", "doc2.txt")
 # Extract all
 ? ""
 ? "Extracting to 'extracted/' folder..."
-system("mkdir -p extracted")
+makeDir("extracted")
 archive.extract("documents.tar.gz", "extracted/")
 
 ? "Extracted files:"
@@ -50,7 +51,7 @@ next
 remove("doc1.txt")
 remove("doc2.txt")
 remove("doc3.txt")
-system("rm -rf extracted")
+OSDeleteFolder("extracted")
 
 ? ""
 ? "Done"

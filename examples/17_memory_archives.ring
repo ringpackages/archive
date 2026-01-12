@@ -2,6 +2,12 @@ load "archive.ring"
 
 # Example: Working with archives in memory
 
+# Create a test archive first
+write("mem_test1.txt", "Memory test file 1")
+write("mem_test2.txt", "Memory test file 2")
+archive_create("test_archive.tar.gz", ["mem_test1.txt", "mem_test2.txt"], 
+               ARCHIVE_FORMAT_TAR, ARCHIVE_COMPRESSION_GZIP)
+
 # Part 1: Read archive from memory
 ? "=== Reading archive from memory ==="
 cArchiveData = read("test_archive.tar.gz")
@@ -32,6 +38,11 @@ if isList(aResult)
     ? "Archive created in memory successfully"
 ok
 writer.free()
+
+# Cleanup
+remove("mem_test1.txt")
+remove("mem_test2.txt")
+remove("test_archive.tar.gz")
 
 ? ""
 ? "Done"
