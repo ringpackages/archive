@@ -1944,13 +1944,12 @@ RING_FUNC(ring_archive_extract)
 	struct archive *a = archive_read_new();
 	struct archive *ext = archive_write_disk_new();
 	struct archive_entry *entry;
-	int flags = ARCHIVE_EXTRACT_TIME | ARCHIVE_EXTRACT_PERM | ARCHIVE_EXTRACT_FFLAGS;
+	int flags = ARCHIVE_EXTRACT_TIME | ARCHIVE_EXTRACT_PERM;
 	int result = ARCHIVE_OK;
 
 	archive_read_support_filter_all(a);
 	archive_read_support_format_all(a);
 	archive_write_disk_set_options(ext, flags);
-	archive_write_disk_set_standard_lookup(ext);
 
 	if (archive_read_open_filename(a, archive_path, 10240) != ARCHIVE_OK)
 	{
