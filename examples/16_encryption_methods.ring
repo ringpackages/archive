@@ -11,7 +11,6 @@ writer.setEncryption(ARCHIVE_ENCRYPTION_AES256)
 writer.open("encrypted_aes256.zip")
 writer.addFile("secret.txt", "AES-256 encrypted content")
 writer.close()
-writer.free()
 ? "Created encrypted_aes256.zip (AES-256)"
 
 # 2. AES-128
@@ -21,7 +20,6 @@ writer.setEncryption(ARCHIVE_ENCRYPTION_AES128)
 writer.open("encrypted_aes128.zip")
 writer.addFile("secret.txt", "AES-128 encrypted content")
 writer.close()
-writer.free()
 ? "Created encrypted_aes128.zip (AES-128)"
 
 # 3. Traditional PKWARE (weak, but compatible with standard unzip)
@@ -31,7 +29,6 @@ writer.setEncryption(ARCHIVE_ENCRYPTION_ZIPCRYPT)
 writer.open("encrypted_zipcrypt.zip")
 writer.addFile("secret.txt", "ZipCrypt encrypted content")
 writer.close()
-writer.free()
 ? "Created encrypted_zipcrypt.zip (Traditional PKWARE)"
 
 # 4. Using setOptions() for manual encryption control
@@ -41,7 +38,6 @@ writer.setOptions("zip:encryption=aes256")
 archive_write_set_passphrase(writer.pHandle, cPassword)
 writer.addFile("secret.txt", "Manual encryption setup")
 writer.close()
-writer.free()
 ? "Created encrypted_manual.zip (using setOptions)"
 
 ? ""

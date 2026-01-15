@@ -9,7 +9,6 @@ writer.addDirectory("subdir/")
 writer.addFile("subdir/nested.txt", "Nested content")
 
 writer.close()
-writer.free()
 
 ? "Created myarchive.tar.gz"
 

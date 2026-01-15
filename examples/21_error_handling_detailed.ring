@@ -13,7 +13,7 @@ if nResult != ARCHIVE_OK
     ? "Errno: " + archive_errno(pRead)
     ? "Error string: " + archive_error_string(pRead)
 ok
-archive_read_free(pRead)
+archive_read_close(pRead)
 
 ? ""
 ? "=== Test 2: Using OOP error handling ==="
@@ -25,7 +25,7 @@ if nResult != ARCHIVE_OK
     ? "Errno: " + reader.errno()
     ? "Error: " + reader.errorString()
 ok
-reader.free()
+reader.close()
 
 ? ""
 ? "=== Test 3: Format detection info (OOP) ==="
@@ -42,7 +42,6 @@ reader.nextEntry()
 ? "Filter name: " + reader.filterName()
 
 reader.close()
-reader.free()
 
 # Cleanup
 remove("error_test.txt")

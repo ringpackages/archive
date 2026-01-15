@@ -49,9 +49,4 @@ entry.clear()
 entry.setPathname("reused.txt")
 ? "Reused entry path: " + entry.pathname()
 
-entry.free()
-dirEntry.free()
-linkEntry.free()
-cloned.free()
-
 ? "Done"

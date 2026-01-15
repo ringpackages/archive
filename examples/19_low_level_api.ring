@@ -23,7 +23,6 @@ while not isnull(pEntry)
 end
 
 archive_read_close(pRead)
-archive_read_free(pRead)
 
 ? ""
 
@@ -46,7 +45,6 @@ while reader.nextEntry()
 end
 
 reader.close()
-reader.free()
 
 # Cleanup
 remove("api_test1.txt")

@@ -22,7 +22,6 @@ while reader.nextEntry()
     ? "  " + reader.entryPath()
 end
 reader.close()
-reader.free()
 
 ? ""
 
@@ -37,7 +36,6 @@ if isList(aResult)
     writer.close()
     ? "Archive created in memory successfully"
 ok
-writer.free()
 
 # Cleanup
 remove("mem_test1.txt")

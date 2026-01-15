@@ -27,7 +27,6 @@ while reader.nextEntry()
 end
 
 reader.close()
-reader.free()
 
 # Cleanup
 remove("test1.txt")

@@ -34,7 +34,6 @@ writer.addDirectory("data/")
 writer.addFile("data/config.json", read("backup_test/data/config.json"))
 
 writer.close()
-writer.free()
 ? "Created backup.zip (encrypted with AES-256)"
 
 # 2. List and verify backup contents
@@ -67,7 +66,6 @@ while reader.nextEntry()
     ok
 end
 reader.close()
-reader.free()
 
 # 4. Full restore
 ? ""
@@ -87,8 +85,11 @@ for aItem in aRestored
 next
 
 # Cleanup
-OSDeleteFolder("backup_test")
-OSDeleteFolder("restored")
+if isWindows()
+    system("rmdir /s /q backup_test restored 2>nul")
+else
+    system("rm -rf backup_test restored")
+ok
 remove("backup.zip")
 
 ? ""

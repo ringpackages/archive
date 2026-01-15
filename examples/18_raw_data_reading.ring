@@ -35,7 +35,6 @@ while not isnull(pEntry)
 end
 
 archive_read_close(pRead)
-archive_read_free(pRead)
 
 # Cleanup
 remove("data1.txt")

@@ -7,7 +7,6 @@ writer.addFile("original.txt", "Original content")
 writer.addSymlink("link.txt", "original.txt")
 
 writer.close()
-writer.free()
 
 ? "Created with_symlink.tar.gz"
 

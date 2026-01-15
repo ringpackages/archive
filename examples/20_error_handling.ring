@@ -9,4 +9,4 @@ if nResult != ARCHIVE_OK
     ? "Error details: " + reader.errorString()
 ok
 
-reader.free()
+reader.close()

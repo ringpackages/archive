@@ -7,7 +7,6 @@ writer.setPassphrase(cPassword)
 writer.open("encrypted.zip")
 writer.addFile("secret.txt", "This is secret content!")
 writer.close()
-writer.free()
 
 ? "Created encrypted.zip with password: " + cPassword
 
