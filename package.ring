@@ -53,7 +53,8 @@ aPackageInfo = [
 		"src/c_src/ring_archive.c",
 		"src/utils/color.ring",
 		"src/utils/install.ring",
-		"src/utils/uninstall.ring"
+		"src/utils/uninstall.ring",
+		"tests/Archive_test.ring"
 	],
 	:ringfolderfiles = 	[
 
